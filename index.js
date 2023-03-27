@@ -83,11 +83,11 @@ app.put("/product/:id", async (req, resp) => {
     resp.send(result)
 })
 
-app.get('/products/user/:userId', (req, res) => {
-    const userId = parseInt(req.params.userId);
-    const userProducts = Product.filter((product) => product.userId === userId);
-    res.json(userProducts);
-  });
+// app.get('/products/user/:userId', (req, res) => {
+//     const userId = parseInt(req.params.userId);
+//     const userProducts = Product.filter((product) => product.userId === userId);
+//     res.json(userProducts);
+//   });
 
 app.get("/search/:key", async (req, resp) => {
     let result = await Product.find({
