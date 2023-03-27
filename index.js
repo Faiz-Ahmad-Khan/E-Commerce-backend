@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config(); 
 require('./db/config');
 const User = require("./db/User");
 const Product = require("./db/Product");
