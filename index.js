@@ -6,7 +6,7 @@ const User = require("./db/User");
 const Product = require("./db/Product");
 const { response } = require("express");
 const Jwt = require('jsonwebtoken');
-const jwtKey = 'e-comm';
+const jwtKey = process.env.jwtKey;
 
 const app = express();
 
