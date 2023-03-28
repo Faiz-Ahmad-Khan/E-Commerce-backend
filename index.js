@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://e-commerce-nmdx.onrender.com"],
+    origin: ["http://localhost:3000", "https://e-commerce.onrender.com"],
   })
 );
 
