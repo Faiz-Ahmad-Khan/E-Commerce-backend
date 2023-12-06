@@ -86,11 +86,17 @@ app.put("/product/:id", async (req, resp) => {
     resp.send(result)
 })
 
-// app.get('/products/user/:userId', (req, res) => {
-//     const userId = parseInt(req.params.userId);
-//     const userProducts = Product.filter((product) => product.userId === userId);
-//     res.json(userProducts);
-//   });
+app.get('/products/users/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    try {
+      const userProducts = await Product.find({ userId: userId });
+      res.json(userProducts);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  
 
 app.get("/search/:key", async (req, resp) => {
     let result = await Product.find({
