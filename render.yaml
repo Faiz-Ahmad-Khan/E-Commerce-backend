@@ -1,0 +1,3 @@
+services:
+  - name: back-end
+    env: node

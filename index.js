@@ -9,6 +9,7 @@ const Jwt = require('jsonwebtoken');
 const jwtKey = process.env.jwtKey;
 
 const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -113,4 +114,6 @@ app.get("/search/:key", async (req, resp) => {
     resp.send(result);
 })
 
-app.listen(5000);
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
