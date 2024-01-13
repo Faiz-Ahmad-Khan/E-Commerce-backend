@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config(); 
+require("dotenv").config();
 require('./db/config');
 const User = require("./db/User");
 const Product = require("./db/Product");
@@ -11,11 +11,14 @@ const jwtKey = process.env.jwtKey;
 const app = express();
 const port = process.env.PORT || 5000;
 
+const corsOptions = {
+    origin: 'https://e-com-dasboard.netlify.app',
+    optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors()
-);
 
 app.post("/register", async (req, resp) => {
     let user = new User(req.body);
@@ -26,7 +29,7 @@ app.post("/register", async (req, resp) => {
         if (err) {
             resp.send({ result: "Something went wrong,Please try after sometime." })
         }
-        resp.send({result, auth: token })
+        resp.send({ result, auth: token })
     })
 })
 
@@ -38,7 +41,7 @@ app.post("/login", async (req, resp) => {
                 if (err) {
                     resp.send({ result: "Something went wrong,Please try after sometime." })
                 }
-                resp.send({user, auth: token })
+                resp.send({ user, auth: token })
             })
         } else {
             resp.send({ result: "No user found" })
@@ -88,14 +91,14 @@ app.put("/product/:id", async (req, resp) => {
 app.get('/products/users/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
-      const userProducts = await Product.find({ userId: userId });
-      res.json(userProducts);
+        const userProducts = await Product.find({ userId: userId });
+        res.json(userProducts);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-  });
-  
-  
+});
+
+
 
 app.get("/search/:key", async (req, resp) => {
     let result = await Product.find({
