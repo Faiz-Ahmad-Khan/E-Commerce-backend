@@ -13,9 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://e-commerce-nmdx.onrender.com"],
-  })
+  cors()
 );
 
 app.post("/register", async (req, resp) => {
